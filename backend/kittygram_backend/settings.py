@@ -1,11 +1,16 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
+
+
+env_path = Path(__file__).resolve().parent.parent / '.env'
+load_dotenv(env_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY не найден в переменных окружения!")
 
 DEBUG = False
 
