@@ -1,16 +1,9 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-
-
-env_path = Path(__file__).resolve().parent.parent / '.env'
-load_dotenv(env_path)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-if not SECRET_KEY:
-    raise ValueError("SECRET_KEY не найден в переменных окружения!")
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-fallback-key')
 
 DEBUG = False
 
@@ -20,6 +13,11 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '51.250.29.108',
     '0.0.0.0'
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://kittitsetyandex.zapto.org",
+    "http://51.250.29.108"
 ]
 
 INSTALLED_APPS = [
