@@ -1,12 +1,7 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from pathlib import Path  # Добавьте этот импорт
 
-# Добавляем путь к проекту в PYTHONPATH
-project_path = str(Path(__file__).parent.parent)
-if project_path not in sys.path:
-    sys.path.append(project_path)
 
 def main():
     """Run administrative tasks."""
@@ -20,6 +15,7 @@ def main():
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+
 
 if __name__ == '__main__':
     main()
