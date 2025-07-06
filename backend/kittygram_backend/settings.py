@@ -1,13 +1,21 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['51.250.29.108', '127.0.0.1', 'localhost', 'kittitsetyandex.zapto.org']
+ALLOWED_HOSTS = [
+    'kittitsetyandex.zapto.org',
+    'localhost',
+    '127.0.0.1',
+    '51.250.29.108',
+    '0.0.0.0'
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -91,7 +99,8 @@ USE_TZ = True
 
 
 STATIC_URL = '/static_backend/'
-STATIC_ROOT = BASE_DIR / 'static_backend' 
+STATIC_ROOT = BASE_DIR / 'static_backend'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = '/var/www/kittygram/media/'
 
