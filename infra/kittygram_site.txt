@@ -1,5 +1,5 @@
 IP: 51.250.29.108;
 name_taski: https://yandexpractictest.ddnsking.com;
 name_kittygram: https://kittitsetyandex.zapto.org;
-login: admin;
-password: admin;
+login: alex;
+password: 226662fkt;
