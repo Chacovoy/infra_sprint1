@@ -1,0 +1,44 @@
+# Конфиг для Taski (HTTPS)
+server {
+    listen 443 ssl;
+    server_name yandexpractictest.ddnsking.com;
+
+    ssl_certificate /etc/letsencrypt/live/yandexpractictest.ddnsking.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/yandexpractictest.ddnsking.com/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+    }
+}
+
+# Конфиг для Kittygram (HTTPS)
+server {
+    listen 443 ssl;
+    server_name kittitsetyandex.zapto.org;
+
+    ssl_certificate /etc/letsencrypt/live/kittitsetyandex.zapto.org/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/kittitsetyandex.zapto.org/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    location / {
+        root /var/www/kittygram;
+        try_files $uri /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://localhost:8080;
+        proxy_set_header Host $host;
+        client_max_body_size 20M;
+    }
+}
+
+# HTTP → HTTPS редирект для ОБОИХ доменов
+server {
+    listen 80;
+    server_name yandexpractictest.ddnsking.com kittitsetyandex.zapto.org;
+    return 301 https://$host$request_uri;
+}
